@@ -126,6 +126,7 @@ window.addEventListener('load', () => {
         let xOffset = 0;
         let yOffset = 0;
         let isCut = false;
+        let boxRect;
         
         // Pointer down
         knifeElement.addEventListener('pointerdown', (e) => {
@@ -135,11 +136,12 @@ window.addEventListener('load', () => {
             initialY = e.clientY - yOffset;
             knifeElement.style.transition = 'none';
             if (dragHint) dragHint.style.opacity = '0'; // hide hint on drag
+            boxRect = giftBoxWrapper.getBoundingClientRect();
         });
         
         // Pointer move
         window.addEventListener('pointermove', (e) => {
-            if (!isDragging || isCut) return;
+            if (!isDragging || isCut || !boxRect) return;
             e.preventDefault();
             
             xOffset = e.clientX - initialX;
@@ -149,7 +151,6 @@ window.addEventListener('load', () => {
             
             // Collision detection
             const knifeRect = knifeElement.getBoundingClientRect();
-            const boxRect = giftBoxWrapper.getBoundingClientRect();
             
             // Check if knife overlaps with the center of the gift box (where ribbon is)
             if (
@@ -210,6 +211,7 @@ window.addEventListener('load', () => {
 });
 
 function startLoader() {
+    window.isCoverActive = false;
     const loader = document.getElementById('loader');
     const fill = document.querySelector('.progress-fill');
     if (!loader || !fill) return;
@@ -310,13 +312,15 @@ for (let i = 0; i < 150; i++) {
     particlesArray.push(new Particle());
 }
 
+window.isCoverActive = true;
 function animateParticles() {
+    requestAnimationFrame(animateParticles);
+    if (window.isCoverActive) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
     }
-    requestAnimationFrame(animateParticles);
 }
 animateParticles();
 

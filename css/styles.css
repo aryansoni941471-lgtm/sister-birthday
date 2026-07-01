@@ -932,7 +932,7 @@ body {
 /* Cover Page (Idea 1) */
 .cover-page {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
     background-color: #fce4ec; /* Soft pink pastel */
     z-index: 1000000;
     display: flex;
@@ -1154,7 +1154,11 @@ body {
 }
 
 @media (max-width: 768px) {
-    .elegant-text { font-size: 2rem; }
-    .elegant-sub { font-size: 1.2rem; }
-    .soft-content { padding: 20px; margin: 20px; }
+    .elegant-text { font-size: 1.8rem; margin-bottom: 10px; }
+    .elegant-sub { font-size: 1.1rem; margin-bottom: 20px; }
+    .soft-content { padding: 20px 20px 45px 20px; margin: 15px; width: 90%; }
+    .interactive-gift-area { transform: scale(0.85); margin-top: 10px; }
+    .knife-wrapper { right: -25px; top: 20px; }
+    .drag-hint { bottom: -50px; font-size: 1rem; }
+    .cover-page { height: 100dvh; }
 }
