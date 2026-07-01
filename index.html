@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 28 Unlocked - Didi's Birthday</title>
+    <!-- Google Fonts for futuristic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Google Font for elegant cover page -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <!-- Elegant Cover Page (Interactive Entry) -->
+    <div id="cover-page" class="cover-page">
+        <div class="soft-content">
+            <h1 class="elegant-text">To the most beautiful, caring, and loving sister...</h1>
+            <p class="elegant-sub">I have something very special for you.</p>
+            
+            <div class="interactive-gift-area">
+                <div class="gift-box-wrapper" id="gift-box-wrapper">
+                    <div class="gift-box" id="gift-box">
+                        <div class="gift-lid" id="gift-lid"></div>
+                        <div class="gift-body"></div>
+                        <div class="ribbon-vertical" id="ribbon-vertical"></div>
+                        <div class="ribbon-horizontal-left" id="ribbon-left"></div>
+                        <div class="ribbon-horizontal-right" id="ribbon-right"></div>
+                        <div class="ribbon-bow" id="ribbon-bow">🎀</div>
+                    </div>
+                </div>
+                
+                <div class="knife-wrapper" id="knife-element" draggable="false">
+                    <div class="knife-emoji">🔪</div>
+                </div>
+                
+                <p class="drag-hint" id="drag-hint">Drag the knife to cut the ribbon</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fingerprint Scanner Overlay -->
+    <div id="fingerprint-overlay" class="fingerprint-overlay">
+        <div class="scanner-container">
+            <h2 class="auth-text" style="font-size: 1.5rem; margin-bottom: 20px;">IDENTITY VERIFICATION REQUIRED</h2>
+            <p style="color: var(--text-muted); letter-spacing: 2px;">CLICK SCANNER 5 TIMES TO VERIFY</p>
+            <div class="fingerprint-icon" id="fingerprint-btn">
+                <i class="fas fa-fingerprint"></i>
+                <div class="scanner-line"></div>
+                <div id="click-counter" style="font-size: 1.2rem; margin-top: 10px; color: var(--neon-pink); font-family: monospace;">0 / 5</div>
+            </div>
+            <div class="scan-logs" id="auth-logs"></div>
+        </div>
+    </div>
+
+    <!-- Custom Toast for Roasts -->
+    <div id="roast-toast" class="roast-toast hidden"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- Global Canvas for Matrix/Starfield Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="glow-text loader-text">INITIALIZING...</div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+
+    <!-- Music Control -->
+    <button id="music-toggle" class="cyber-btn floating-btn">
+        <i class="fas fa-play"></i>
+    </button>
+    
+    <!-- DO NOT CLICK Button -->
+    <button id="roast-btn" class="cyber-btn roast-btn">DO NOT CLICK ☠️</button>
+    <div id="yt-player" style="position: absolute; top: -9999px; left: -9999px; width: 0; height: 0; overflow: hidden;"></div>
+    <div id="yt-sfx-player" style="position: absolute; top: -9999px; left: -9999px; width: 0; height: 0; overflow: hidden;"></div>
+
+    <div class="smooth-scroll-wrapper">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section panel">
+            <div class="hero-content">
+                <div class="date-badge fade-up-elem" style="display: inline-block; padding: 5px 15px; border: 1px solid var(--neon-pink); border-radius: 20px; color: var(--neon-pink); font-family: monospace; letter-spacing: 3px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(255, 42, 117, 0.3);">06 JULY</div>
+                <h1 class="huge-heading glitch" data-text="HAPPY 28TH, DIDI">HAPPY 28TH, DIDI</h1>
+                <p class="subtitle fade-up-elem">A cinematic journey created by your little brother.</p>
+                <div id="scroll-indicator" class="scroll-indicator fade-up-elem" style="cursor: pointer;">
+                    <p>SCROLL TO EXPLORE</p>
+                    <div class="mouse-icon"><div class="wheel"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal Scroll Gallery (Pinned by GSAP) -->
+        <section id="gallery-pin" class="gallery-section panel">
+            <div class="gallery-container">
+                <div class="gallery-header">
+                    <h2 class="neon-heading">ARCHIVED MEMORIES</h2>
+                    <p>Scrolling through time...</p>
+                </div>
+                <div class="horizontal-scroll-track">
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/03669d69-2bef-4aa4-b266-431bd11a0716.jpg" alt="Memory 1">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: FAMILY // TOGETHERNESS</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/42ba1050-86b6-4b1f-9132-5ee83668747e.jpg" alt="Memory 2">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: SIBLINGS // SMILES</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/563cf574-882f-4bd6-8414-780c95b7b4c3.jpg" alt="Memory 3">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: MEMORIES // POLAROID</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/9481b597-3649-4400-bc26-cb91754f2cd6.jpg" alt="Memory 4">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: PORTRAIT // SERENE</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/9f6ad35b-9875-4b64-b66e-fe9e9104690f.jpg" alt="Memory 5">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: BOND // FOREVER</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/Screenshot 2026-06-28 192019.png" alt="Memory 6">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: CAPTURED // MOMENT</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/dcee0f29-b454-4b61-ba4e-594d255abd50.jpg" alt="Memory 7">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: SPECIAL // DAY</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/e40c7cf9-1019-4824-b104-dab4fb19b8f7.jpg" alt="Memory 8">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: HAPPINESS // SMILE</div>
+                    </div>
+                    <div class="holo-card">
+                        <div class="img-wrapper">
+                            <img src="images/03669d69-2bef-4aa4-b266-431bd11a0716.jpg" alt="Memory 9">
+                            <div class="scanline"></div>
+                        </div>
+                        <div class="card-info">DATALOG: ALWAYS // TOGETHER</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Letter Reveal -->
+        <section id="letter" class="letter-section panel">
+            <div class="hologram-container">
+                <div class="holo-ring outer"></div>
+                <div class="holo-ring inner"></div>
+                <div class="letter-box glass-panel">
+                    <h2 class="tech-title">DECRYPTING MESSAGE...</h2>
+                    <p id="typewriter-text" class="terminal-text"></p>
+                    <p class="signature hidden-sig">> END OF TRANSMISSION // <span class="neon-pink">YOUR BROTHER</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reasons Grid (3D Hover Effects) -->
+        <section id="reasons" class="reasons-section panel">
+            <h2 class="neon-heading center reveal-text">CORE ATTRIBUTES</h2>
+            <div class="cyber-grid">
+                <div class="cyber-card">
+                    <div class="card-border"></div>
+                    <i class="fas fa-heart holo-icon pink"></i>
+                    <h3>EMPATHY</h3>
+                    <p>Always caring for others first.</p>
+                </div>
+                <div class="cyber-card">
+                    <div class="card-border"></div>
+                    <i class="fas fa-shield-alt holo-icon blue"></i>
+                    <h3>STRENGTH</h3>
+                    <p>Unbreakable spirit and willpower.</p>
+                </div>
+                <div class="cyber-card">
+                    <div class="card-border"></div>
+                    <i class="fas fa-bolt holo-icon yellow"></i>
+                    <h3>ENERGY</h3>
+                    <p>Lighting up every room you enter.</p>
+                </div>
+                <div class="cyber-card">
+                    <div class="card-border"></div>
+                    <i class="fas fa-star holo-icon gold"></i>
+                    <h3>INSPIRATION</h3>
+                    <p>My role model forever.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Truth Section -->
+        <section id="truth-section" class="truth-section panel">
+            <h2 class="neon-heading center reveal-text">FINAL VERIFICATION</h2>
+            <p class="tech-subtitle" style="margin-bottom: 40px; font-size: 1.5rem; text-align: center;">Do you admit that you are getting old?</p>
+            <div class="truth-buttons">
+                <button id="btn-yes" class="cyber-btn">YES, I ACCEPT MY FATE 🧓</button>
+                <button id="btn-no" class="cyber-btn danger-btn">NO, I'M STILL YOUNG 🙅‍♀️</button>
+            </div>
+            <p id="truth-result" class="hidden tech-title" style="margin-top: 30px; font-size: 1.5rem; color: #00ff00;">Truth Accepted. You may proceed.</p>
+        </section>
+
+        <!-- Holographic Cake -->
+        <section id="cake-section" class="cake-section panel">
+            <h2 class="neon-heading reveal-text">LEVEL 28 REACHED</h2>
+            <p class="subtitle">System ready for upgrade.</p>
+            
+            <div class="holo-cake-container">
+                <div class="holo-cake">
+                    <div class="cake-base"></div>
+                    <div class="cake-mid"></div>
+                    <div class="cake-top"></div>
+                    <div class="hologram-beam"></div>
+                    <div class="neon-number">28</div>
+                </div>
+            </div>
+            
+            <button id="ignite-btn" class="cyber-btn pulse-btn">INITIATE CELEBRATION PROTOCOL</button>
+        </section>
+
+        <!-- Final Unlock / Surprise -->
+        <section id="surprise" class="surprise-section panel">
+            <div class="unlock-container">
+                <div class="cyber-lock" id="main-lock">
+                    <i class="fas fa-lock"></i>
+                    <div class="scan-line-lock"></div>
+                </div>
+                <p class="auth-text">AWAITING AUTHORIZATION...</p>
+                
+                <!-- Terms and Conditions -->
+                <div class="tnc-container hidden" id="tnc-container">
+                    <h3 class="neon-blue" style="margin-bottom:15px; font-family: monospace;">T&C TO DECRYPT:</h3>
+                    <label class="tnc-label">
+                        <input type="checkbox" id="tnc-1" class="cyber-checkbox">
+                        <span class="tnc-text">I accept that my brother is the favorite child.</span>
+                    </label>
+                    <label class="tnc-label">
+                        <input type="checkbox" id="tnc-2" class="cyber-checkbox">
+                        <span class="tnc-text">I promise to share 50% of my birthday cake with him.</span>
+                    </label>
+                </div>
+
+                <button id="unlock-btn" class="cyber-btn hidden">DECRYPT SURPRISE</button>
+            </div>
+            
+            <div id="final-message" class="final-core hidden">
+                <div class="final-photo-container">
+                    <img src="images/f1aef128-a290-481f-960f-941cd1e8daad.jpg" alt="Final Memory" class="final-photo hidden">
+                </div>
+                <h1 class="huge-heading neon-pink">I LOVE YOU, DIDI.</h1>
+                <p class="tech-subtitle">PROUD TO BE YOUR BROTHER.</p>
+                <button id="claim-gift-btn" class="cyber-btn pulse-btn" style="margin-top: 40px;">CLAIM PHYSICAL GIFT 🎁</button>
+            </div>
+        </section>
+
+    </div> <!-- End smooth-scroll-wrapper -->
+
+    <!-- BSOD Overlay -->
+    <div id="bsod-overlay" class="bsod-overlay hidden">
+        <h1 class="bsod-smile">:(</h1>
+        <h2>Your system ran into a problem and needs to restart.</h2>
+        <br>
+        <p>CRITICAL_ERROR: GIFT_NOT_FOUND_EXCEPTION</p>
+        <br>
+        <p>Details:</p>
+        <p>Aapne mere birthday par mujhe kya hi de diya tha jo abhi gift expect kar rahi ho? 😜</p>
+        <br>
+        <p class="bsod-percentage">0% complete</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
