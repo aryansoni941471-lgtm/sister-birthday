@@ -272,7 +272,7 @@ body {
 }
 
 .gallery-container {
-    width: 900vw; /* 9 cards */
+    width: max-content;
     display: flex;
     flex-wrap: nowrap;
     height: 100%;
@@ -603,8 +603,10 @@ body {
 .hidden { display: none !important; opacity: 0; }
 
 @media (max-width: 768px) {
-    .huge-heading { font-size: 2.5rem; }
+    .cursor-dot, .cursor-glow { display: none !important; }
+    .huge-heading { font-size: 10vw; white-space: nowrap; }
     .neon-heading { font-size: 1.8rem; }
+    .roast-toast { width: 90%; right: 5%; top: 80px; text-align: center; }
     .tech-subtitle { font-size: 1.2rem !important; }
     .horizontal-scroll-track { padding: 0 5vw; gap: 5vw; }
     .holo-card { width: 85vw; }

@@ -61,8 +61,7 @@ function handleFpClick(e) {
     }
 }
 
-fpBtn.addEventListener('mousedown', handleFpClick);
-fpBtn.addEventListener('touchstart', handleFpClick);
+fpBtn.addEventListener('pointerdown', handleFpClick);
 // Scroll indicator click
 const scrollIndicator = document.getElementById('scroll-indicator');
 if(scrollIndicator) {
@@ -308,7 +307,8 @@ class Particle {
     }
 }
 
-for (let i = 0; i < 150; i++) {
+const particleCount = window.innerWidth < 768 ? 50 : 150;
+for (let i = 0; i < particleCount; i++) {
     particlesArray.push(new Particle());
 }
 
@@ -324,9 +324,13 @@ function animateParticles() {
 }
 animateParticles();
 
+let lastInnerWidth = window.innerWidth;
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    if (window.innerWidth !== lastInnerWidth) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        lastInnerWidth = window.innerWidth;
+    }
 });
 
 // Music Toggle (YouTube Player)
@@ -422,7 +426,7 @@ function initAnimations() {
     const galleryTrack = document.querySelector('.horizontal-scroll-track');
     
     // Calculate total scroll distance based on container width vs viewport
-    let scrollWidth = galleryTrack.offsetWidth - window.innerWidth + 200;
+    let scrollWidth = galleryTrack.scrollWidth - window.innerWidth;
 
     gsap.to(galleryTrack, {
         x: -scrollWidth,
@@ -433,10 +437,10 @@ function initAnimations() {
             scrub: 1,
             end: () => "+=" + scrollWidth,
             onUpdate: (self) => {
-                // Thoda thoda party bomber while scrolling gallery
-                if (Math.abs(self.getVelocity()) > 50 && Math.random() > 0.85) {
+                // Thoda thoda party bomber while scrolling gallery - disabled on mobile for performance
+                if (window.innerWidth > 768 && Math.abs(self.getVelocity()) > 50 && Math.random() > 0.95) {
                     confetti({
-                        particleCount: 4,
+                        particleCount: 3,
                         spread: 50,
                         startVelocity: 30,
                         origin: { x: Math.random(), y: Math.random() * 0.3 },
