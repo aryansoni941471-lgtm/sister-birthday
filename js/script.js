@@ -53,7 +53,12 @@ function handleFpClick(e) {
             gsap.to(fpOverlay, {opacity: 0, duration: 1, onComplete: () => {
                 fpOverlay.style.pointerEvents = 'none';
                 fpOverlay.style.display = 'none';
-                if (isPlayerReady && !isPlaying) {
+                
+                const quizOverlay = document.getElementById('quiz-overlay');
+                if (quizOverlay) {
+                    quizOverlay.style.display = 'flex';
+                    gsap.fromTo(quizOverlay, {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)"});
+                } else if (isPlayerReady && !isPlaying) {
                     ytPlayer.playVideo();
                 }
             }});
@@ -62,6 +67,49 @@ function handleFpClick(e) {
 }
 
 fpBtn.addEventListener('pointerdown', handleFpClick);
+
+// Quiz Logic
+const quizBtns = document.querySelectorAll('.quiz-btn');
+const quizOverlay = document.getElementById('quiz-overlay');
+const emojiAnimContainer = document.getElementById('emoji-anim-container');
+
+quizBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Disable buttons so they can't be clicked multiple times
+        quizBtns.forEach(b => b.style.pointerEvents = 'none');
+        
+        // Animate emoji from bottom to center
+        gsap.to(emojiAnimContainer, {
+            bottom: "40%", 
+            opacity: 1, 
+            duration: 1.5, 
+            ease: "power3.out",
+            onComplete: () => {
+                // Fade out emoji
+                gsap.to(emojiAnimContainer, {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 1,
+                    onComplete: () => {
+                        // Hide quiz and start main site
+                        gsap.to(quizOverlay, {
+                            opacity: 0,
+                            scale: 0.8,
+                            duration: 0.8,
+                            onComplete: () => {
+                                quizOverlay.style.display = 'none';
+                                if (typeof isPlayerReady !== 'undefined' && isPlayerReady && !isPlaying) {
+                                    try { ytPlayer.playVideo(); } catch(e) {}
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+});
+
 // Scroll indicator click
 const scrollIndicator = document.getElementById('scroll-indicator');
 if(scrollIndicator) {

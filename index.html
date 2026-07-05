@@ -54,6 +54,26 @@
         </div>
     </div>
 
+    <!-- Quiz Overlay -->
+    <div id="quiz-overlay" class="quiz-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-dark); z-index: 999998; display: none; justify-content: center; align-items: center; flex-direction: column;">
+        <div class="quiz-container" style="text-align: center; background: rgba(0,0,0,0.8); padding: 40px; border: 1px solid var(--neon-blue); border-radius: 15px; box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); width: 90%; max-width: 500px;">
+            <h2 class="neon-heading" style="font-size: 2rem; margin-bottom: 20px;">SECURITY QUESTION</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; font-family: monospace; color: #fff;">tree ke tane ko english mei kya bolte hai?</p>
+            <div class="quiz-options" style="display: flex; flex-direction: column; gap: 15px;">
+                <button class="cyber-btn quiz-btn">1. trunk</button>
+                <button class="cyber-btn quiz-btn">2. option 1</button>
+                <button class="cyber-btn quiz-btn">3. option 2</button>
+                <button class="cyber-btn quiz-btn">4. all of the above</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Emoji animation container -->
+    <div id="emoji-anim-container" style="position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); z-index: 999999; display: flex; flex-direction: column; align-items: center; pointer-events: none; opacity: 0;">
+        <div style="font-size: 5rem;">😊</div>
+        <div style="font-family: monospace; font-size: 2.5rem; font-weight: bold; color: #00ff00; text-shadow: 0 0 15px #00ff00; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 10px; border: 2px solid #00ff00; margin-top: 10px;">TRUNK</div>
+    </div>
+
     <!-- Custom Toast for Roasts -->
     <div id="roast-toast" class="roast-toast hidden"></div>
 
